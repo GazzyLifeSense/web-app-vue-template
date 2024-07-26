@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { Button, Select, SelectOption } from 'ant-design-vue';
 import { useUserStore } from '@/store/user';
+import { useI18n } from '@/hooks/useI18n.ts';
+import { useConfigOptionStore } from '@/store/configOption.ts';
+import { localeMap, changeLocale } from '@/locales/setupI18n'
+const { t } = useI18n()
+const configOptionStore = useConfigOptionStore()
 defineProps<{ msg: string }>()
 
 const count = ref(0)
 const userStore = useUserStore()
+const langKey = ref('')
 </script>
 
 <template>
@@ -15,8 +22,21 @@ const userStore = useUserStore()
       <button type="button" @click="count++">count is {{ count }}</button>
       <span>
         Edit
-        <code>components/Main.vue</code> to test HMR
+        <code>views/Main.vue</code> to test HMR
       </span>
+      <p>
+        <h2>I18n Test: </h2>
+        Sample Text: <Button>{{ t("common.loadingText") }} </Button><br/>
+        Current UserSetting Language: <Button>({{ configOptionStore.language }})</Button>
+        Switch: 
+        <Select
+          ref="select"
+          v-model:value="langKey"
+          style="width: 120px"
+        >
+          <SelectOption v-for="key of Object.keys(localeMap)" :value="key" :key="key" @click="changeLocale(localeMap[key])">{{ localeMap[key] }}</SelectOption>
+        </Select>
+      </p>
     </div>
 
     <p>

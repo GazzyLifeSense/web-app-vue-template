@@ -1,6 +1,6 @@
 import { createRouter, RouteRecordRaw } from 'vue-router'
 import NProgress from 'nprogress'
-import Main from '@/components/Main.vue'
+import Main from '@/views/Main.vue'
 import NotFound from '@/components/NotFound.vue'
 import { createWebHistory } from 'vue-router'
 
