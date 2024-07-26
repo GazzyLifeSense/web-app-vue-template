@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Button, Select, SelectOption } from 'ant-design-vue';
+import { Button, Pagination, Select, SelectOption } from 'ant-design-vue';
 import { useUserStore } from '@/store/user';
 import { useI18n } from '@/hooks/useI18n.ts';
 import { useConfigOptionStore } from '@/store/configOption.ts';
@@ -19,14 +19,16 @@ const langKey = ref('')
     <h1>Welcome to {{ msg }}, {{ userStore.user._id }}!</h1>
 
     <div class="card">
-      <button type="button" @click="count++">count is {{ count }}</button>
+      <Button  @click="count++">count is {{ count }}</Button>
       <span>
         Edit
         <code>views/Main.vue</code> to test HMR
       </span>
       <p>
         <h2>I18n Test: </h2>
-        Sample Text: <Button>{{ t("common.loadingText") }} </Button><br/>
+        Sample Text: <Button>{{ t("common.loadingText") }}</Button>
+        <Pagination style="margin-top: 10px;" :total="50" show-size-changer show-quick-jumper :locale="{ page: t('antdLocale.Pagination.page'), items_per_page: t('antdLocale.Pagination.items_per_page'), jump_to: t('antdLocale.Pagination.jump_to') }" />
+        <br/>
         Current UserSetting Language: <Button>({{ configOptionStore.language }})</Button>
         Switch: 
         <Select
@@ -48,7 +50,8 @@ const langKey = ref('')
       <img src="@/assets/vue.svg" alt="vue" />
       <img src="@/assets/vite.svg" alt="vite" />
       <img src="@/assets/pinia.svg" alt="pinia">
-      <router-link to="NotFound">Friendly 404 Page</router-link></p>
+      <router-link to="NotFound">Friendly 404 Page</router-link>
+    </p>
   </div>
 </template>
 
