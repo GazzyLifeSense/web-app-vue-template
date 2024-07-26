@@ -28,7 +28,7 @@ const router = createRouter({
     routes,
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((_to, _from, next) => {
     // 开启进度条
 	NProgress.start();
     // 获取Token
