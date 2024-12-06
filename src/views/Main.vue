@@ -5,18 +5,25 @@ import { useUserStore } from '@/store/user';
 import { useI18n } from '@/hooks/useI18n.ts';
 import { useConfigOptionStore } from '@/store/configOption.ts';
 import { localeMap, changeLocale } from '@/locales/setupI18n'
+import { trackApiPerformance, trackError, trackPageLoad, trackStayTime } from '@/monitor';
 const { t } = useI18n()
 const configOptionStore = useConfigOptionStore()
 defineProps<{ msg: string }>()
 
+trackPageLoad()
 const count = ref(0)
 const userStore = useUserStore()
 const langKey = ref('')
+
+const trackApi = () => 
+  trackApiPerformance(new Promise((r)=>{
+    setTimeout(r, 2000)
+  }))
 </script>
 
 <template>
   <div class="main-container">
-    <h1>Welcome to {{ msg }}, {{ userStore.user._id }}!</h1>
+    <h1 id="stay-1">Welcome to {{ msg }}, {{ userStore.user._id }}!</h1>
 
     <div class="card">
       <Button  @click="count++">count is {{ count }}</Button>
@@ -40,7 +47,12 @@ const langKey = ref('')
         </Select>
       </p>
     </div>
-
+    <p>
+      <Button @click="trackApi">trackApi</Button> 
+      <Button @click="trackError">trackError</Button> 
+      <Button @click="()=>{throw new Error('test')}">throwError</Button> 
+      <Button @click="trackStayTime('stay-1')">trackStayTime</Button> 
+    </p>
     <p>
       Check out
       <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank">create-vue</a>
