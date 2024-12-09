@@ -1,24 +1,23 @@
-import { createRouter, RouteRecordRaw } from 'vue-router'
-import NProgress from 'nprogress'
-import Main from '@/views/Main.vue'
-import NotFound from '@/components/NotFound.vue'
-import { createWebHistory } from 'vue-router'
+import { createRouter, RouteRecordRaw, createWebHistory } from "vue-router"
+import NProgress from "nprogress"
+import DemoPage from "@/views/DemoPage.vue"
+import NotFound from "@/components/NotFound.vue"
 
 const routes: RouteRecordRaw[] = [
     {        
-        path:'/',
-        name: 'Main',
-        component: Main,
-        props: { msg: 'vue-web-template' }
+        path:"/",
+        name: "Main",
+        component: DemoPage,
+        props: { msg: "vue-web-template" }
     },
     {
-        path: '/404',
-        name: 'NotFound',
+        path: "/404",
+        name: "NotFound",
         component: NotFound
     },
     {
-        path: '/:pathMatch(.*)*', // 页面不存在的情况下会跳到404页面
-        redirect: '/404',
+        path: "/:pathMatch(.*)*", // 页面不存在的情况下会跳到404页面
+        redirect: "/404",
     }
     
 ]

@@ -1,28 +1,28 @@
-import { createApp } from 'vue'
-import App from '@/App.vue'
+import { createApp } from "vue"
+import App from "@/App.vue"
 
 // style sheet
-import './design/ele.less'
-import '../style.less'
-import 'animate.css'
+import "./design/ele.less"
+import "../style.less"
+import "animate.css"
 
 // progress bar
-import 'nprogress'
-import 'nprogress/nprogress.css'
+import "nprogress"
+import "nprogress/nprogress.css"
 
 // router
-import router from '@/route'
+import router from "@/route"
 
 // pinia
-import { createPinia } from 'pinia'
+import { createPinia } from "pinia"
 
 // i18n
-import { setupI18n } from './locales/setupI18n'
+import { setupI18n } from "./locales/setupI18n"
 
 const pinia = createPinia()
 const MainApp = createApp(App)
 MainApp.use(router)
 MainApp.use(pinia)
 setupI18n(MainApp)
-MainApp.provide('piniaInstance', pinia)
-MainApp.mount('#app')
+MainApp.provide("piniaInstance", pinia)
+MainApp.mount("#app")
