@@ -1,7 +1,7 @@
 export { trackButton, trackFormInput, trackScroll, trackPageLoad, trackApiPerformance, trackError, trackStayTime }
 
 // 用于记录或发送跟踪数据到服务器的函数
-function trackEvent(eventType: string, details: any) {
+function trackEvent(eventType: string, details: { [key: string]: unknown }) {
     console.log(`Event: ${eventType}`, details); // 在控制台打印事件类型和详情
     // 上报到服务端。
     fetch('/测试接口地址',{ method: 'POST', body: JSON.stringify({ eventType, details }) });
@@ -51,7 +51,7 @@ function trackPageLoad(){
 }
 
 // 测量 API 调用的耗时
-function trackApiPerformance(fn: Promise<any>) {
+function trackApiPerformance(fn: Promise<unknown>) {
     const start = performance.now(); // 记录 API 调用的开始时间
 
     fn.then(() => {

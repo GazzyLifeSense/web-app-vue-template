@@ -8,7 +8,7 @@ export const useConfigOptionStore = defineStore('configOptionStore', {
     };
   },
   actions: {
-    saveLanguage(locale: any){
+    saveLanguage(locale: string){
       this.language = locale;
       localStorage.setItem("language", locale)
     }

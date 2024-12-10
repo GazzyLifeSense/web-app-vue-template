@@ -1,9 +1,9 @@
 import antdLocale from 'ant-design-vue/es/locale/es_ES';
-const modules = import.meta.glob('./es-us/*', { eager: true }) as any;
+const modules = import.meta.glob('./es-us/*', { eager: true }) as Record<string, { default: { name: string } }>;
 
-const obj: any = {};
+const obj: {[key: string]: { name: string }} = {};
 Object.keys(modules).forEach(key => {
-  const mod = modules[key].default || {};
+  const mod = modules[key]?.default || {};
   obj[mod.name] = mod;
 });
 export default {

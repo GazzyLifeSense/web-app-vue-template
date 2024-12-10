@@ -1,7 +1,5 @@
-import type { App } from 'vue';
-import { unref } from 'vue';
-import type { I18n, I18nOptions } from 'vue-i18n';
-import { createI18n } from 'vue-i18n';
+import { App, unref } from 'vue';
+import { I18n, I18nOptions, createI18n } from 'vue-i18n';
 import { useConfigOptionStore } from '@/store/configOption.ts';
 import en_gb_Locale from './lang/en-gb';
 import de_de_Locale from './lang/de-de';
@@ -47,7 +45,7 @@ export const localeSetting: LocaleSetting = {
 };
 
 // 语言文件
-export const localeObj: { [key: string]: any } = {
+export const localeObj: { [key: string]: typeof en_us_Locale } = {
   // 英语
   'en-us': en_us_Locale, // 英语-美国
   'en-gb': en_gb_Locale, // 英语-英国
@@ -78,15 +76,15 @@ async function createI18nOptions(): Promise<I18nOptions> {
   const configOptionStore = useConfigOptionStore();
 
   // 获取浏览器语言
-  let browserLanguage: string = navigator.language.toLowerCase();
+  const browserLanguage: string = navigator.language.toLowerCase();
   // 确定目标语言  已选择语言 > 浏览器语言 > 默认语言
-  const locales: string[] | any[] = [configOptionStore.language, browserLanguage, localeSetting.locale];
+  const locales: (string | null)[] = [ configOptionStore.language, browserLanguage, localeSetting.locale ];
   // 获取可用目标语言翻译
   let targetLocale = ''
   let targetLocaleObj
   for(let i = 0; i < locales.length; i++){
-    targetLocale = locales[i]
-    targetLocaleObj = await localeObj[targetLocale];
+    targetLocale = locales[i] || ''
+    targetLocaleObj = localeObj[targetLocale];
     if(targetLocaleObj) break
   }
   const message = targetLocaleObj?.message ?? {};
@@ -131,6 +129,6 @@ export async function changeLocale(locale: string) {
   }
 
   // 目标语言已加载，直接设置
-  {(i18n.global.locale as any).value = locale;}
+  {(i18n.global.locale as { value: string }).value = locale;}
   return locale;
 }

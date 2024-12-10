@@ -1,12 +1,13 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
+import { defineConfig } from "vite"
+import vue from "@vitejs/plugin-vue"
+import { resolve } from "path"
+import eslint from "vite-plugin-eslint"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [ vue(), eslint() ],
   server: {
-    host: '0.0.0.0',
+    host: "0.0.0.0",
     port: 8080,
     open: true,
     cors: true, // 允许跨域

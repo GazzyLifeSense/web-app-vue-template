@@ -17,8 +17,7 @@ export default [
   { files: [ "**/*.vue" ], languageOptions: { parserOptions: { parser: tseslint.parser } } },
   {
     rules: {
-      "no-unused-vars": "error",
-      "quotes": "error",
+      "@typescript-eslint/no-unused-vars": "error",
       "semi": "off",
       "object-curly-spacing": [ "error", "always" ],
       "array-bracket-spacing": [ "error", "always" ],

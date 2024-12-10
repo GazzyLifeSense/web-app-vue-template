@@ -9,7 +9,7 @@ type I18nGlobalTranslation = {
   (key: string, named: Record<string, unknown>): string;
 };
 
-type I18nTranslationRestParameters = [string, any];
+type I18nTranslationRestParameters = (string|unknown)[];
 
 function getKey(namespace: string | undefined, key: string) {
   if (!namespace) {
@@ -22,7 +22,7 @@ function getKey(namespace: string | undefined, key: string) {
 }
 
 export function useI18n(namespace?: string): {
-  t: I18nGlobalTranslation;
+  t: I18nGlobalTranslation
 } {
   const normalFn = {
     t: (key: string) => {
@@ -33,12 +33,13 @@ export function useI18n(namespace?: string): {
   if (!i18n) {
     return normalFn;
   }
+
   const { t, ...methods } = i18n.global;
-  const tFn: I18nGlobalTranslation = (key: string, ...arg: any[]) => {
+  const tFn: I18nGlobalTranslation = (key: string, ...arg: unknown[]) => {
     if (!key) return '';
     if (!key.includes('.') && !namespace) return key;
-    
-    // @ts-ignore
+
+    // @ts-expect-error ignore
     return t(getKey(namespace, key), ...(arg as I18nTranslationRestParameters));
   };
   return {
