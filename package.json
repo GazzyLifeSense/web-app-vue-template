@@ -1,7 +1,7 @@
 {
-  "name": "realtime-chat-client",
+  "name": "vue-web-template",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -20,6 +20,12 @@
     "globals": "^15.13.0",
     "less": "^4.2.0",
     "less-loader": "^12.2.0",
+    "stylelint": "^16.11.0",
+    "stylelint-config-recess-order": "^5.1.1",
+    "stylelint-config-recommended-less": "^3.0.1",
+    "stylelint-config-recommended-vue": "^1.5.0",
+    "stylelint-config-standard": "^36.0.1",
+    "stylelint-order": "^6.0.4",
     "typescript": "^5.2.2",
     "typescript-eslint": "^8.17.0",
     "vite": "^5.2.0",
